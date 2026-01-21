@@ -3,7 +3,6 @@ import { SlippageCalculatorService } from './slippage-calculator.service';
 import {
   SlippageConfigDto,
   SlippageReportDto,
-  SlippageEstimationDto,
   SlippageToleranceLevel,
 } from './dto/slippage-config.dto';
 
@@ -115,7 +114,7 @@ export class SlippageProtectionService {
       }
 
       return result;
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(
         `Error validating trade execution for ${context.symbol}`,
         error.stack,
@@ -258,11 +257,13 @@ export class SlippageProtectionService {
     }
 
     if (filters?.startDate) {
-      reports = reports.filter(r => r.timestamp >= filters.startDate);
+      const startDate = filters.startDate;
+      reports = reports.filter(r => r.timestamp >= startDate);
     }
-
+    
     if (filters?.endDate) {
-      reports = reports.filter(r => r.timestamp <= filters.endDate);
+      const endDate = filters.endDate;
+      reports = reports.filter(r => r.timestamp <= endDate);
     }
 
     if (filters?.onlyExceeded) {

@@ -99,7 +99,7 @@ export class SlippageCalculatorService {
         recommendation,
         reasoning,
       };
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(
         `Error estimating slippage for ${estimationDto.symbol}`,
         error.stack,
@@ -358,7 +358,7 @@ export class SlippageCalculatorService {
    */
   private async getCurrentMarketPrice(
     symbol: string,
-    side: 'buy' | 'sell',
+    _side: 'buy' | 'sell',
   ): Promise<number> {
     // TODO: Replace with actual market data provider integration
     // This is a placeholder that should connect to your exchange API
